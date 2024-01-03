@@ -1,4 +1,4 @@
-name: Generate Doxygen Site and Push to Web Branch
+name: Doxygen
 
 on:
   push:
@@ -6,43 +6,31 @@ on:
       - main
 
 jobs:
-  generate-and-push:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-      - name: Update Main Branch
-        run: git pull origin main
+    - name: Install Doxygen
+      run: sudo apt-get install doxygen
 
-      - name: Install Doxygen
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y doxygen
+    - name: Generate Doxygen Documentation
+      run: |
+        cd docs
+        doxygen Doxyfile
 
-      - name: Clean Web Branch
-        run: |
-          git fetch origin
-          git checkout -b web origin/web || git checkout -b web
+    - name: Copy HTML to web branch
+      run: |
+        mkdir web
+        cp -r docs/html/* web/
 
-      - name: Generate Doxygen Site
-        run: |
-          cd docs
-          doxygen Doxyfile
-
-      - name: Copy HTML Files to Web Branch
-        run: |
-          mkdir -p ../temp_web_branch
-          cp -r docs/html/* ../temp_web_branch
-          rm -rf docs/html
-          mv ../temp_web_branch/* .
-          rm -rf ../temp_web_branch
-
-      - name: Commit and Push to Web Branch
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git add .
-          git commit -m "Move Doxygen HTML files to web branch root"
-          git push origin web
+    - name: Push to web branch
+      run: |
+        git config user.name "${{ github.actor }}"
+        git config user.email "${{ github.actor }}@users.noreply.github.com"
+        git checkout -b web
+        git add -A
+        git commit -m "Update HTML documentation"
+        git push origin web
