@@ -38,4 +38,4 @@ jobs:
         cp -r ../web/* .
         git add .
         git commit -m "Update web branch with documentation"
-        git push origin web
+        git push origin HEAD:web
