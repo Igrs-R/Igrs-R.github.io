@@ -1,0 +1,53 @@
+name: Build and Deploy Docs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set working directry
+      run: mkdir work && cd work
+      
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Doxygen
+      run:  |
+        sudo apt update
+        sudo apt install build-essential cmake flex bison libiconv-hook-dev libclang-dev libclang-cpp11-dev
+        git clone https://github.com/doxygen/doxygen.git
+        cd doxygen
+        git checkout Release_1_9_8
+        mkdir build
+        cd build
+        cmake -G "Unix Makefiles" ..
+        make
+        sudo make install
+        cd ../..
+        
+    - name: Build Documentation
+      run: |
+        cd docs/doxygen
+        doxygen Doxyfile
+        cd ../..
+        
+        
+    - name: Copy Docs to Web Branch
+      run: |
+        mkdir -p ../web
+        cp -r docs/html/* ../web/
+        git config pull.rebase false
+        git config user.name "${{ github.actor }}"
+        git config user.email "${{ github.actor }}@users.noreply.github.com"
+        
+        git pull --rebase origin web
+        find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -r {} +
+        cp -r ../web/* .
+        git add .
+        git commit -m "Update web branch with documentation"
+        git push origin HEAD:web
