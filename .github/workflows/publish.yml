@@ -7,14 +7,24 @@ on:
 
 jobs:
   generate-and-push:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Update Main Branch
+        run: git pull origin main
+
       - name: Install Doxygen
-        run: sudo apt-get install -y doxygen
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen
+
+      - name: Clean Web Branch
+        run: |
+          git checkout web
+          git reset --hard origin/web
 
       - name: Generate Doxygen Site
         run: |
