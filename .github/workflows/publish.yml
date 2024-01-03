@@ -36,5 +36,6 @@ jobs:
         git pull --rebase origin web
         find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -r {} +
         cp -r ../web/* .
+        git add .
         git commit -m "Update web branch with documentation"
         git push origin web
