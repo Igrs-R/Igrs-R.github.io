@@ -46,6 +46,7 @@ jobs:
     - name: Copy Docs to Web Branch
       run: |
         mkdir -p web
+        ls -a
         cp -r docs/html/* web/
         
         git config user.name "${{ github.actor }}"
