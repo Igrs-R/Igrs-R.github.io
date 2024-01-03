@@ -20,7 +20,7 @@ jobs:
       uses: mattnotmitt/doxygen-action@edge
       with:
           working-directory: 'docs/'
-          doxyfile-path: 'docs/doxygen/Doxyfile'
+          doxyfile-path: 'docs/doxygen/'
 
     - name: Copy Docs to Web Branch
       run: |
