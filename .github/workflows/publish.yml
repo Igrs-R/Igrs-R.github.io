@@ -23,7 +23,7 @@ jobs:
 
       - name: Clean Web Branch
         run: |
-          git fetch origin
+          git branch web main
           git checkout -b web origin/web || git checkout -b web
 
       - name: Generate Doxygen Site
@@ -31,15 +31,10 @@ jobs:
           cd docs
           doxygen Doxyfile
 
-      - name: Copy HTML Files to Web Branch
-        run: |
-          cp -r docs/html/* .
-          rm -rf docs/html
-
       - name: Commit and Push to Web Branch
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git add .
-          git commit -m "Move Doxygen HTML files to web branch root"
+          git commit -m "Generate Doxygen site"
           git push origin web
