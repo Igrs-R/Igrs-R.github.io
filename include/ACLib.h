@@ -32,8 +32,6 @@ namespace ACLib
 	};
 	/**
 	* @brief For checking library operation.
-	* @param none.
-	* @return none.
 	* @code{.cpp}
 	* // Example of using the OperationCheck function
 	*#include <ACLib.h>
