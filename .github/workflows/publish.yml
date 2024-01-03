@@ -28,7 +28,7 @@ jobs:
 
     - name: Copy Doxygen HTML to web branch
       run: |
-        cp -r docs/html/. web/
+        cp -r docs/html/* web/
         git add web
         git commit -m "Update Doxygen documentation"
         git push
