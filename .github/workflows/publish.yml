@@ -15,12 +15,15 @@ jobs:
       
     - name: Checkout Repository
       uses: actions/checkout@v2
-
+      
+    - name: Go to working directory
+      run: cd docs
+    
     - name: Set Up Doxygen
       uses: mattnotmitt/doxygen-action@edge
-      with:
-          working-directory: 'docs/'
-          doxyfile-path: 'docs/doxygen/Doxyfile'
+
+    - name: Go back directory
+      run: cd ..
 
     - name: Copy Docs to Web Branch
       run: |
