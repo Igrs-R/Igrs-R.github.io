@@ -1,0 +1,81 @@
+html {
+    /* override light-mode variables here */
+	--primary-color: #03a9f4;
+	--page-background-color: #e0e0e0;
+	--side-nav-background: #37474F;
+	--side-nav-foreground: #f0f0f0;
+	--side-nav-fixed-width: 300px;
+	--searchbar-background: var(--page-background-color);
+    --searchbar-foreground: var(--page-foreground-color);
+	--header-background: var(--side-nav-background);
+	--header-foreground: #f0f0f0;
+	--code-background: #f0f0f0;
+	 --fragment-background: #f0f0f0;
+	 --separator-color: #a0a0a0;
+	 --toc-foreground: var(--primay-color);
+}
+
+html.dark-mode {
+    /* define dark-mode variable overrides here if you DO use doxygen-awesome-darkmode-toggle.js */
+	--primary-color: #b22222;
+}
+
+@media screen and (max-width: 767px) {
+	html {
+		--toc-foreground: #ffffff;
+	}
+}
+
+#authorlogo {
+	text-align: center;
+	vertical-align: bottom;
+	border-collapse: separate;
+	width: 50px;
+	height: 50px;
+}
+#authorlogo img {
+	border: 0px none;
+	max-width: 100%;
+    height: auto;
+	border-radius: 50%;
+	overflow: hidden;
+	cursor: pointer;
+}
+#projectname {
+	cursor: pointer;
+}
+
+div#nav-tree ul.children_ul ul.children_ul ul.children_ul a[class^="namespace"]::before {
+  content: "N ";
+  /* from .icon */
+  font-family: Arial, Helvetica;
+  font-weight: bold;
+  font-size: 12px;
+  height: 14px;
+  width: 16px;
+  display: inline-block;
+  background-color: var(--primary-color) !important;
+  color: white;
+  text-align: center;
+  border-radius: 4px;
+  margin-left: 2px;
+  margin-right: 6px;
+}
+
+div#nav-tree ul.children_ul ul.children_ul ul.children_ul a[class^="class"]::before {
+  content: "C ";
+  /* from .icon */
+  font-family: Arial, Helvetica;
+  font-weight: bold;
+  font-size: 12px;
+  height: 14px;
+  width: 16px;
+  display: inline-block;
+  background-color: var(--primary-color) !important;
+  color: white;
+  text-align: center;
+  border-radius: 4px;
+  margin-left: 2px;
+  margin-right: 6px;
+}
+
