@@ -33,8 +33,11 @@ jobs:
 
       - name: Copy HTML Files to Web Branch
         run: |
-          cp -r docs/html/* .
+          mkdir -p ../temp_web_branch
+          cp -r docs/html/* ../temp_web_branch
           rm -rf docs/html
+          mv ../temp_web_branch/* .
+          rm -rf ../temp_web_branch
 
       - name: Commit and Push to Web Branch
         run: |
