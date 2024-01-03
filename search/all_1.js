@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['declspec_4',['DECLSPEC',['../ACLib_8h.html#aa4c7a931f4a968f818b2a1b10a432185',1,'ACLib.h']]]
+  ['build_0',['How to build',['../index.html#how-to-build',1,'']]]
 ];
