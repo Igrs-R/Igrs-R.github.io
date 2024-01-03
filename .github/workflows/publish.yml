@@ -23,8 +23,8 @@ jobs:
 
       - name: Clean Web Branch
         run: |
-          git checkout -b web origin/web || git checkout -b web
-          git merge origin main
+          git checkout -b web
+          git merge origin/main
 
       - name: Generate Doxygen Site
         run: |
