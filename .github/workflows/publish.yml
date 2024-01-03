@@ -9,6 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    - name: Set working directry
+      run: mkdir work && cd work
+
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
@@ -19,21 +22,19 @@ jobs:
     - name: Build Documentation
       run: |
         cd docs
-        ls -a
-        pwd
         doxygen Doxyfile
         cd ..
 
     - name: Copy Docs to Web Branch
       run: |
-        mkdir -p web
-        ls -a
-        pwd
-        cp -r docs/html/* web/
+        mkdir -p ../web
+        cp -r docs/html/* ../web/
         
         git config user.name "${{ github.actor }}"
         git config user.email "${{ github.actor }}@users.noreply.github.com"
         
-        git add web
+        git pull origin web
+        find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -r {} +
+        cp -r ../web/*
         git commit -m "Update web branch with documentation"
         git push origin web
