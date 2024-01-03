@@ -22,7 +22,7 @@ jobs:
         sudo apt install -y wget make
         wget https://github.com/doxygen/doxygen/releases/download/Release_1_9_8/doxygen-1.9.8.linux.bin.tar.gz
         tar -xzvf doxygen-1.9.8.linux.bin.tar.gz
-        cd  doxygen-1.9.8.linux.bin
+        cd  doxygen-1.9.8
         sudo make install
         cd ..
         
