@@ -16,16 +16,11 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Set up Doxygen
-      run:  |
-        sudo apt update
-        sudo apt install -y doxygen
-
-    - name: Build Documentation
-      run: |
-        cd docs
-        doxygen Doxyfile
-        cd ..
+    - name: Set Up Doxygen
+      uses: mattnotmitt/doxygen-action@edge
+      with:
+          working-directory: 'docs/'
+          doxyfile-path: 'docs/Doxygen'
 
     - name: Copy Docs to Web Branch
       run: |
