@@ -29,11 +29,11 @@ jobs:
       run: |
         mkdir -p ../web
         cp -r docs/html/* ../web/
-        
+        git config pull.rebase false
         git config user.name "${{ github.actor }}"
         git config user.email "${{ github.actor }}@users.noreply.github.com"
         
-        git pull origin web
+        git pull --rebase origin web
         find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -r {} +
         cp -r ../web/* .
         git commit -m "Update web branch with documentation"
