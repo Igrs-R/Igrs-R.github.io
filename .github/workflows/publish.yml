@@ -24,18 +24,6 @@ jobs:
         doxygen Doxyfile
         cd ..
 
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: docs/html
-
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
     - name: Copy Docs to Web Branch
       run: |
         mkdir -p web
