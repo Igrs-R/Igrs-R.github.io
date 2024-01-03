@@ -17,7 +17,9 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up Doxygen
-      run: sudo apt-get install -y doxygen
+      run:  |
+        sudo apt update
+        sudo apt install -y doxygen
 
     - name: Build Documentation
       run: |
