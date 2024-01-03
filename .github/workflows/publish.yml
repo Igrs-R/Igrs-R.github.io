@@ -9,10 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    steps:
     - name: Set working directry
       run: mkdir work && cd work
-
-    steps:
+      
     - name: Checkout Repository
       uses: actions/checkout@v2
 
