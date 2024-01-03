@@ -10,11 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Set up Doxygen
-      run: sudo apt-get install -y doxygen
-
+    - name: Set working directry
+      run: mkdir work && cd work
+      
     - name: Checkout Repository
       uses: actions/checkout@v2
+
+    - name: Set up Doxygen
+      run: sudo apt-get install -y doxygen
 
     - name: Build Documentation
       run: |
@@ -26,19 +29,12 @@ jobs:
       run: |
         mkdir -p ../web
         cp -r docs/html/* ../web/
-
-    - name: Configure Git
-      run: |
-        git config --global user.name "${{ github.actor }}"
-        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-
-    - name: Update Web Branch
-      run: |
-        git remote add web-remote "${{ github.repository }}"
-        git fetch web-remote web
-        git checkout web
+        
+        git config user.name "${{ github.actor }}"
+        git config user.email "${{ github.actor }}@users.noreply.github.com"
+        
+        git pull origin web
         find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -r {} +
         cp -r ../web/* .
-        git add .
         git commit -m "Update web branch with documentation"
-        git push web-remote web
+        git push origin web
